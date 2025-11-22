@@ -41,11 +41,11 @@ public class UrlShortenerController {
             @Valid @RequestBody CreateShortUrlRequest request) {
 
         try {
-            log.info("Получен запрос на сокращение URL: {}", request.getOriginalUrl());
+            // log.info("Request URL received: {}", request.getOriginalUrl());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(urlShortenerService.createShortUrl(request));
         } catch (Exception e) {
-            log.error("Ошибка при создании короткой ссылки: {}", e.getMessage());
+            // log.error("Error creating short link: {}", e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
@@ -66,10 +66,10 @@ public class UrlShortenerController {
     @GetMapping
     public ResponseEntity<List<ShortUrlResponse>> getAllUrls() {
         try {
-            log.info("Получен запрос на получение всех коротких ссылок");
+            // log.info("A request to retrieve all short links has been received.");
             return ResponseEntity.ok(urlShortenerService.getAllUrl());
         } catch (Exception e) {
-            log.error("Ошибка при получении всех коротких ссылок: {}", e.getMessage());
+            // log.error("Error getting all short links: {}", e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
@@ -99,13 +99,13 @@ public class UrlShortenerController {
     @GetMapping("/{shortCode}/info")
     public ResponseEntity<ShortUrlResponse> getUrlInfo(@PathVariable String shortCode) {
         try {
-            log.info("Запрос информации по короткому коду: {}", shortCode);
+            // log.info("Request information by short code: {}", shortCode);
 
             Optional<ShortUrlResponse> urlInfo = urlShortenerService.getOriginalUrl(shortCode);
             return urlInfo.map(ResponseEntity::ok)
                     .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
         } catch (Exception e) {
-            log.error("Ошибка при получении информации о короткой ссылке: {}", e.getMessage());
+            // log.error("Error getting short link information: {}", e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }

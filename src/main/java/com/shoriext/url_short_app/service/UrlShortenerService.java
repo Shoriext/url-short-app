@@ -41,7 +41,8 @@ public class UrlShortenerService {
                 .build();
 
         ShortUrl savedUrl = shortUrlRepository.save(shortUrl);
-        log.info("Создана короткая ссылка: {} -> {}", shortCode, request.getOriginalUrl());
+        // log.info("Создана короткая ссылка: {} -> {}", shortCode,
+        // request.getOriginalUrl());
 
         return mapToResponse(savedUrl);
     }
@@ -52,7 +53,7 @@ public class UrlShortenerService {
         if (shortUrl.isPresent()) {
             ShortUrl url = shortUrl.get();
             if (url.getExpiredAt() != null && url.getExpiredAt().isBefore(LocalDateTime.now())) {
-                log.warn("Короткая ссылка истекла: {}", shortCode);
+                // log.warn("Короткая ссылка истекла: {}", shortCode);
                 return Optional.empty();
             }
 
@@ -82,7 +83,7 @@ public class UrlShortenerService {
                     .clickCount(shortUrl.getClickCount())
                     .build();
         } catch (Exception e) {
-            log.error("Ошибка при создании короткой ссылки: {}", e.getMessage());
+            // log.error("Ошибка при создании короткой ссылки: {}", e.getMessage());
             return null;
         }
     }
