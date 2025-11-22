@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import javax.swing.border.StrokeBorder;
-
 import org.springframework.stereotype.Service;
 
 import com.shoriext.url_short_app.dto.CreateShortUrlRequest;
@@ -20,9 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UrlShortenerService {
     private final ShortUrlRepository shortUrlRepository;
+    private static final Random RANDOM = new Random();
 
     private static final String BASE_URL = "http://localhost:8080/";
-
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     private static final int CODE_LENGTH = 8;
@@ -100,11 +98,11 @@ public class UrlShortenerService {
     }
 
     private String generateRandomCode() {
-        Random random = new Random();
+
         StringBuilder sb = new StringBuilder(CODE_LENGTH);
 
         for (int i = 0; i < CODE_LENGTH; i++) {
-            int index = random.nextInt(CHARACTERS.length());
+            int index = RANDOM.nextInt(CHARACTERS.length());
             sb.append(CHARACTERS.charAt(index));
         }
 
