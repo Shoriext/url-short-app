@@ -11,5 +11,5 @@ import com.shoriext.url_short_app.entity.ShortUrl;
 public interface ShortUrlRepository extends JpaRepository<ShortUrl, Long> {
     Optional<ShortUrl> findByShortCode(String shortCode);
 
-    boolean exexistsByShortCode(String shortCode);
+    boolean existsByShortCode(String shortCode);
 }

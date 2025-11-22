@@ -92,7 +92,7 @@ public class UrlShortenerService {
 
         do {
             shortCode = generateRandomCode();
-        } while (shortUrlRepository.exexistsByShortCode(shortCode));
+        } while (shortUrlRepository.existsByShortCode(shortCode));
 
         return shortCode;
     }
